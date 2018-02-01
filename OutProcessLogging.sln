@@ -7,7 +7,7 @@ Project("{A07B5EB6-E848-4116-A8D0-A826331D98C6}") = "MyServiceFabricApp", "MySer
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MyStatelessService", "MyStatelessService\MyStatelessService.csproj", "{8DAAA971-11F5-424F-8A7F-10C5F6B36E46}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EventSourceListenerService", "EventSourceListenerService\EventSourceListenerService.csproj", "{0D77C98C-1BD8-4845-8BDA-A14AC9B83B39}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OutProcessETWListener", "OutProcessETWListener\OutProcessETWListener.csproj", "{6812D715-28CD-4C78-861B-7CA42F6EC091}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,14 +33,14 @@ Global
 		{8DAAA971-11F5-424F-8A7F-10C5F6B36E46}.Release|Any CPU.Build.0 = Release|Any CPU
 		{8DAAA971-11F5-424F-8A7F-10C5F6B36E46}.Release|x64.ActiveCfg = Release|Any CPU
 		{8DAAA971-11F5-424F-8A7F-10C5F6B36E46}.Release|x64.Build.0 = Release|Any CPU
-		{0D77C98C-1BD8-4845-8BDA-A14AC9B83B39}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{0D77C98C-1BD8-4845-8BDA-A14AC9B83B39}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{0D77C98C-1BD8-4845-8BDA-A14AC9B83B39}.Debug|x64.ActiveCfg = Debug|Any CPU
-		{0D77C98C-1BD8-4845-8BDA-A14AC9B83B39}.Debug|x64.Build.0 = Debug|Any CPU
-		{0D77C98C-1BD8-4845-8BDA-A14AC9B83B39}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{0D77C98C-1BD8-4845-8BDA-A14AC9B83B39}.Release|Any CPU.Build.0 = Release|Any CPU
-		{0D77C98C-1BD8-4845-8BDA-A14AC9B83B39}.Release|x64.ActiveCfg = Release|Any CPU
-		{0D77C98C-1BD8-4845-8BDA-A14AC9B83B39}.Release|x64.Build.0 = Release|Any CPU
+		{6812D715-28CD-4C78-861B-7CA42F6EC091}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6812D715-28CD-4C78-861B-7CA42F6EC091}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6812D715-28CD-4C78-861B-7CA42F6EC091}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{6812D715-28CD-4C78-861B-7CA42F6EC091}.Debug|x64.Build.0 = Debug|Any CPU
+		{6812D715-28CD-4C78-861B-7CA42F6EC091}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6812D715-28CD-4C78-861B-7CA42F6EC091}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6812D715-28CD-4C78-861B-7CA42F6EC091}.Release|x64.ActiveCfg = Release|Any CPU
+		{6812D715-28CD-4C78-861B-7CA42F6EC091}.Release|x64.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

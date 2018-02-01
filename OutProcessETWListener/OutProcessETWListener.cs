@@ -11,14 +11,14 @@ using Microsoft.ServiceFabric.Services.Communication.AspNetCore;
 using Microsoft.ServiceFabric.Services.Communication.Runtime;
 using Microsoft.ServiceFabric.Services.Runtime;
 
-namespace OutProcessETWConsumer
+namespace OutProcessETWListener
 {
     /// <summary>
     /// The FabricRuntime creates an instance of this class for each service type instance. 
     /// </summary>
-    internal sealed class OutProcessETWConsumer : StatelessService
+    internal sealed class OutProcessETWListenerService : StatelessService
     {
-        public OutProcessETWConsumer(StatelessServiceContext context)
+        public OutProcessETWListenerService(StatelessServiceContext context)
             : base(context)
         { }
 

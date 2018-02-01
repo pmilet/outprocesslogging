@@ -7,9 +7,9 @@ using System.Text;
 using System.Threading.Tasks;
 using Microsoft.ServiceFabric.Services.Runtime;
 
-namespace OutProcessETWConsumer
+namespace OutProcessETWListener
 {
-    [EventSource(Name = "MyCompany-MyServiceFabricApp-OutProcessETWConsumer")]
+    [EventSource(Name = "MyCompany-MyServiceFabricApp-OutProcessETWListener")]
     internal sealed class ServiceEventSource : EventSource
     {
         public static readonly ServiceEventSource Current = new ServiceEventSource();

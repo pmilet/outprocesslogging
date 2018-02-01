@@ -20,4 +20,10 @@
     <PackageReference Include="Microsoft.ServiceFabric.Services" Version="2.8.232" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Content Update="appsettings.json">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+
 </Project>

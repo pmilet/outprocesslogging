@@ -2,7 +2,7 @@
 using Microsoft.ApplicationInsights.DataContracts;
 using Microsoft.ApplicationInsights.Extensibility;
 
-namespace OutProcessETWConsumer
+namespace OutProcessETWListener
 {
     public class TelemetryFilter : ITelemetryProcessor
     {

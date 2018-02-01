@@ -1,13 +1,9 @@
-﻿using Microsoft.ApplicationInsights.Extensibility;
-using Microsoft.AspNetCore.Builder;
+﻿using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.Diagnostics.EventFlow;
-using Microsoft.Diagnostics.EventFlow.Inputs;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using pmilet.DomainEvents;
-using pmilet.Playback;
 
 namespace MyStatelessService
 {
@@ -43,19 +39,13 @@ namespace MyStatelessService
             });
 
          
-            services.AddPlayback(Configuration);
-
             services.AddMvc();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory, ITransactionTelemetryContext transactionTelemetryContext)
+        public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)
         {
-            //PM: ADDED
-           // var diagnosticPipeline = app.ApplicationServices.GetRequiredService<DiagnosticPipeline>();
-           // loggerFactory.AddEventFlow(diagnosticPipeline);
-            
-            
+            loggerFactory.AddEventSourceLogger();
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
@@ -65,17 +55,9 @@ namespace MyStatelessService
             app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "Test API V1"));
             app.UseElmPage();
             app.UseElmCapture();
-
-            app.UsePlayback();
             
             app.UseMiddleware<TelemetryMiddleware>();
             app.UseMvc();
-
-            var builder = TelemetryConfiguration.Active.TelemetryProcessorChainBuilder;
-            builder
-                .UseAdaptiveSampling()
-                .Use((next) => new TransactionTelemetryFilter(next, transactionTelemetryContext));
-            builder.Build();
 
         }        
 

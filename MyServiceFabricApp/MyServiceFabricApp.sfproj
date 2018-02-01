@@ -32,8 +32,8 @@
     <Content Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\EventSourceListenerService\EventSourceListenerService.csproj" />
     <ProjectReference Include="..\MyStatelessService\MyStatelessService.csproj" />
+    <ProjectReference Include="..\OutProcessETWListener\OutProcessETWListener.csproj" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.Common.targets" />
   <PropertyGroup>

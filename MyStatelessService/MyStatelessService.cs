@@ -1,12 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Fabric;
 using System.IO;
-using System.Linq;
-using System.Threading;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.Diagnostics.EventFlow;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.ServiceFabric.Services.Communication.AspNetCore;
 using Microsoft.ServiceFabric.Services.Communication.Runtime;
@@ -19,11 +14,9 @@ namespace MyStatelessService
     /// </summary>
     internal sealed class MyStatelessService : StatelessService
     {
-        DiagnosticPipeline _pipeline;
-        public MyStatelessService(StatelessServiceContext context, DiagnosticPipeline pipeline) //PM: MODIFIED
+        public MyStatelessService(StatelessServiceContext context) //PM: MODIFIED
             : base(context)
-        {
-            _pipeline = pipeline;
+        { 
         }
 
         /// <summary>
@@ -43,8 +36,7 @@ namespace MyStatelessService
                                     .UseKestrel()
                                     .ConfigureServices(
                                         services => services
-                                            .AddSingleton<StatelessServiceContext>(serviceContext)
-                                            .AddSingleton<DiagnosticPipeline>(_pipeline)) //PM: ADDED
+                                            .AddSingleton<StatelessServiceContext>(serviceContext))
                                     .UseContentRoot(Directory.GetCurrentDirectory())
                                     .UseStartup<Startup>()
                                     .UseServiceFabricIntegration(listener, ServiceFabricIntegrationOptions.None)

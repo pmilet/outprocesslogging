@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace OutProcessETWConsumer
+namespace OutProcessETWListener
 {
     internal class TelemetryContext : ITelemetryContext
     {
