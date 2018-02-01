@@ -52,7 +52,11 @@ namespace OutProcessETWListener
             {
                 properties.Add(name, value.PayloadStringByName(name));
             }
-            telemetryClient.TrackTrace(value.FormattedMessage, properties);
+            if (properties.ContainsKey("FormattedMessage"))
+            {
+                string message = properties["FormattedMessage"];
+                telemetryClient.TrackTrace( message, properties);
+            }
         }
 
         private void TrackMetric(TraceEvent value)
