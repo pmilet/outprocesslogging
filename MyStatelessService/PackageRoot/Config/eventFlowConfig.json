@@ -1,0 +1,93 @@
+﻿{
+  "inputs": [
+    //{
+    //  "type": "Microsoft.Extensions.Logging"
+    //},
+    {
+      "type": "EventSource",
+      "sources": [
+        //{ "providerName": "Microsoft-ServiceFabric-Services" },
+        //{ "providerName": "Microsoft-ServiceFabric-Actors" },
+        //{ "providerName": "SGBIS-MyStatelessService-Request" },
+        //{ "providerNamePrefix": "SGBIS-Metric-" },
+        //{ "providerName": "SGBIS-Request" },
+        //{ "providerName": "pmilet.DomainEvents" }
+      ]
+    },
+    {
+      "type": "PerformanceCounter",
+      "sampleIntervalMsec": "5000",
+      "counters": [
+        {
+          "counterCategory": "Process",
+          "counterName": "Private Bytes"
+        }
+      ]
+    }
+  ],
+  "filters": [
+    {
+      "type": "drop",
+      "include": "Level == Debug"
+    }
+  ]
+  ,
+  "outputs": [
+    {
+        "type": "ApplicationInsights",
+        // (replace the following value with your AI resource's instrumentation key)
+        "instrumentationKey": "062d261a-ce87-47b6-881e-ce4e4703c229",
+        "filters": [
+          {
+            "type": "metadata",
+            "metadata": "ai_event",
+            "include": "ProviderName == SGBIS-MyStatelessService-Request",
+            "eventNameProperty": "eventName"
+          },
+          {
+            "type": "metadata",
+            "metadata": "ai_event",
+            "include": "ProviderName == pmilet.DomainEvents",
+            "eventNameProperty": "source"
+          },
+          {
+            "type": "metadata",
+            "metadata": "request",
+            "include": "ProviderName ~= SGBIS-Request",
+            "requestNameProperty": "requestName",
+            "isSuccessProperty": "isSuccess",
+            "durationProperty": "durationMsec"
+          },
+          {
+            "type": "metadata",
+            "metadata": "metric",
+            "include": "ProviderName == SGBIS-Metric-Time",
+            "metricName": "Request-Time",
+            "metricValueProperty": "value"
+          },
+          {
+            "type": "metadata",
+            "metadata": "metric",
+            "include": "ProviderName==EventFlow-PerformanceCounterInput && CounterCategory==Process && CounterName==\"Private Bytes\"",
+            "metricName": "Private-Bytes",
+            "metricValueProperty": "Value"
+          },
+          {
+            "type": "metadata",
+            "metadata": "metric",
+            "include": "ProviderName ~= EventFlow ",
+            "metricName": "Private Bytes",
+            "metricValueProperty": "value"
+          }
+
+        ]
+      }
+      //,
+      //{
+      //  "type": "OmsOutput",
+      //  "workspaceId": "5b2dd1e2-d4f4-410b-a967-9d9803272245",
+      //  "workspaceKey": "<base-64-encoded workspace key>"
+      //}   
+      ],
+      "schemaVersion": "2016-08-11"
+    }
