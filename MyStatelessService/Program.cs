@@ -14,13 +14,15 @@ namespace MyStatelessService
         {
             try
             {
-                    ServiceRuntime.RegisterServiceAsync("MyStatelessServiceType",
-                    context => new MyStatelessService(context)).GetAwaiter().GetResult();
 
-                    ServiceEventSource.Current.ServiceTypeRegistered(Process.GetCurrentProcess().Id, typeof(MyStatelessService).Name);
+                ServiceRuntime.RegisterServiceAsync("MyStatelessServiceType",
+                context => new MyStatelessService(context)).GetAwaiter().GetResult();
 
-                    // Prevents this host process from terminating so services keeps running. 
-                    Thread.Sleep(Timeout.Infinite);
+                ServiceEventSource.Current.ServiceTypeRegistered(Process.GetCurrentProcess().Id, typeof(MyStatelessService).Name);
+
+                // Prevents this host process from terminating so services keeps running. 
+                Thread.Sleep(Timeout.Infinite);
+
             }
             catch (Exception e)
             {

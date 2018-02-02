@@ -9,7 +9,8 @@ namespace MyStatelessService
     public class ValueRequested : DomainEvent
     {
         public ValueRequested() : base("MyStatelessService", "1.0")
-        {
-        }
+        { }
+
+        public string Message { get; set; }
     }
 }

@@ -16,7 +16,8 @@ namespace MyStatelessService
     {
         public MyStatelessService(StatelessServiceContext context) //PM: MODIFIED
             : base(context)
-        { 
+        {
+
         }
 
         /// <summary>
@@ -36,7 +37,8 @@ namespace MyStatelessService
                                     .UseKestrel()
                                     .ConfigureServices(
                                         services => services
-                                            .AddSingleton<StatelessServiceContext>(serviceContext))
+                                            .AddSingleton<StatelessServiceContext>(serviceContext)
+                                            )
                                     .UseContentRoot(Directory.GetCurrentDirectory())
                                     .UseStartup<Startup>()
                                     .UseServiceFabricIntegration(listener, ServiceFabricIntegrationOptions.None)

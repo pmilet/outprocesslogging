@@ -35,9 +35,7 @@ namespace OutProcessETWListener
         {
             _eventProcessor.ProcessTraceEvent(value);
             _logger.LogTrace($"trace processed from {value.ProviderName}");
-        }
-
-    
+        }    
     }
 
 }

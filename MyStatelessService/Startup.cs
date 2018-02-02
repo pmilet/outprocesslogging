@@ -3,7 +3,9 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
+using MyStatelessService.Controllers;
 using pmilet.DomainEvents;
+using pmilet.Playback;
 
 namespace MyStatelessService
 {
@@ -24,14 +26,17 @@ namespace MyStatelessService
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddScoped<IDomainEventDispatcher, DomainEventDispatcher>();
+            services.AddSingleton<IDomainEventDispatcher, DomainEventDispatcher>();
             services.AddSingleton<ITransactionTelemetryContext, TransactionTelemetryContext>();
+            services.AddScoped<ValueRequestedDomainEventHandler, ValueRequestedDomainEventHandler>();
 
             services.AddElm(options =>
             {
                 options.Path = new Microsoft.AspNetCore.Http.PathString("/elm");
                 options.Filter = (a, logLevel) => logLevel >= Microsoft.Extensions.Logging.LogLevel.Information;
             });
+
+            services.AddPlayback(Configuration);
 
             services.AddSwaggerGen(c =>
             {
@@ -43,9 +48,10 @@ namespace MyStatelessService
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)
+        public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory, ValueRequestedDomainEventHandler handler)
         {
             loggerFactory.AddEventSourceLogger();
+            loggerFactory.AddDebug();
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
@@ -55,6 +61,8 @@ namespace MyStatelessService
             app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "Test API V1"));
             app.UseElmPage();
             app.UseElmCapture();
+
+            app.UsePlayback();
             
             app.UseMiddleware<TelemetryMiddleware>();
             app.UseMvc();
